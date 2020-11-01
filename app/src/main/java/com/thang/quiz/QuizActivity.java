@@ -4,7 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 
 import com.thang.quiz.question.Question;
 
@@ -35,7 +34,10 @@ public class QuizActivity extends AppCompatActivity {
 	boolean submit;
 
 	ArrayList<Integer> Answers;
-
+	ArrayList<Integer> arrayListTime;
+	Runnable rTime;
+	Handler handler;
+	int iTime;
 
 	String q_nos;
 
@@ -44,6 +46,9 @@ public class QuizActivity extends AppCompatActivity {
 
 	@BindView(R.id.question)
 	TextView questions;
+
+	@BindView(R.id.q_times)
+	TextView txtTimes;
 
 	@BindView(R.id.optionA)
 	RadioButton opA;
@@ -76,6 +81,7 @@ public class QuizActivity extends AppCompatActivity {
 		questions.setText("Quiz");
 		prevButton.setVisibility(View.GONE);
 		Answers = new ArrayList<>();
+		arrayListTime = new ArrayList<>();
 
 		ques = -1;
 		score = 0;
@@ -85,7 +91,30 @@ public class QuizActivity extends AppCompatActivity {
 		goNext();
 	}
 
+	private void CountTime()
+	{
+		iTime = 15;
+		txtTimes.setText("Time: "+iTime);
+		handler = new Handler();
+		rTime = new Runnable() {
+			@Override
+			public void run() {
+				if(iTime != 0)
+				{
+					iTime--;
+					txtTimes.setText("Time: "+iTime);
+					handler.postDelayed(rTime,1000);
+				}
+				else {
+					goNext();
+				}
+			}
+		};
+		handler.postDelayed(rTime,1000);
+	}
+
 	public void goNext() {
+
 		ques++;
 
 		if (ques >= qAndA.question.size()) {
@@ -126,6 +155,7 @@ public class QuizActivity extends AppCompatActivity {
 		} catch (Exception e) {
 			optionsGroup.clearCheck();
 		}
+		CountTime();
 	}
 
 	public void clickPrev(View view) {
@@ -211,6 +241,10 @@ public class QuizActivity extends AppCompatActivity {
 	}
 
 	public void clickSubmit(final View view) {
+		if(ques != 0)
+		{
+			arrayListTime.add(15 - iTime);
+		}
 		AlertDialog.Builder alertConfirm = new AlertDialog.Builder(this);
 		alertConfirm.setTitle("Confirm Submission");
 		alertConfirm.setMessage("Do you want to submit quiz?");
@@ -237,7 +271,8 @@ public class QuizActivity extends AppCompatActivity {
 			checkScore();
 		submit = false;
 		percentage = (float) (score * 100) / qAndA.question.size();
-		prevButton.setVisibility(View.INVISIBLE);
+//		prevButton.setVisibility(View.INVISIBLE);
+		prevButton.setVisibility(View.GONE);
 		opA.setClickable(false);
 		opB.setClickable(false);
 		opC.setClickable(false);
@@ -281,7 +316,11 @@ public class QuizActivity extends AppCompatActivity {
 	}
 
 	public void clickNext(View view) {
-
+		if(ques != 0)
+		{
+			arrayListTime.add(15 - iTime);
+		}
+		handler.removeCallbacks(rTime);
 		int selectedId = optionsGroup.getCheckedRadioButtonId();
 		switch (selectedId) {
 			case R.id.optionA:
@@ -319,7 +358,8 @@ public class QuizActivity extends AppCompatActivity {
 			goNext();
 		}
 		if (ques > 0)
-			prevButton.setVisibility(View.VISIBLE);
+			prevButton.setVisibility(View.GONE);
+//			prevButton.setVisibility(View.VISIBLE);
 
 		nextC++;
 		ans = 0;
@@ -335,15 +375,25 @@ public class QuizActivity extends AppCompatActivity {
 	}
 
 	public void clickSolutions() {
-		Intent solutions = new Intent(this, SolutionActivity.class);
-		solutions.putIntegerArrayListExtra("Answer", Answers);
+		Intent solutions = new Intent(QuizActivity.this, SolutionActivity.class);
+		solutions.putIntegerArrayListExtra("Answers", Answers);
 		solutions.putStringArrayListExtra("Question", (ArrayList<String>) qAndA.question);
 		solutions.putStringArrayListExtra("optA", (ArrayList<String>) qAndA.optA);
 		solutions.putStringArrayListExtra("optB", (ArrayList<String>) qAndA.optB);
 		solutions.putStringArrayListExtra("optC", (ArrayList<String>) qAndA.optC);
 		solutions.putStringArrayListExtra("optD", (ArrayList<String>) qAndA.optD);
-		solutions.putIntegerArrayListExtra("Answers", (ArrayList<Integer>) qAndA.Answer);
+		solutions.putIntegerArrayListExtra("Answer", (ArrayList<Integer>) qAndA.Answer);
+		solutions.putIntegerArrayListExtra("Times", arrayListTime);
+		solutions.putExtra("Score",score);
 		startActivity(solutions);
+		finish();
+//		Log.d("asdasd",Answers.toString());
+//		Log.d("asdasd",qAndA.question.toString());
+//		Log.d("asdasd",qAndA.optA.toString());
+//		Log.d("asdasd",qAndA.optB.toString());
+//		Log.d("asdasd",qAndA.optC.toString());
+//		Log.d("asdasd",qAndA.optD.toString());
+//		Log.d("asdasd",qAndA.Answer.toString());
 	}
 
 	@Override

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@android:color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:layout_marginHorizontal="@dimen/_10dp"
+        android:id="@+id/txt_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ABC"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_20sdp"/>
+    <TextView
+        android:layout_marginHorizontal="@dimen/_15sp"
+        android:id="@+id/txt_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_18sdp"
+        android:text="ANC"/>
+    <TextView
+        android:layout_marginHorizontal="@dimen/_15sp"
+        android:id="@+id/txt_correct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_18sdp"
+        android:text="ANC"/>
+    <TextView
+        android:layout_marginHorizontal="@dimen/_15sp"
+        android:id="@+id/txt_timeanswerit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_18sdp"
+        android:text="ANC"/>
+</LinearLayout>
