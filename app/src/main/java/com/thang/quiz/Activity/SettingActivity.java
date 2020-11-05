@@ -1,16 +1,16 @@
-package com.thang.quiz;
+package com.thang.quiz.Activity;
 
 import android.content.SharedPreferences;
-
+import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
-import android.os.Bundle;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.thang.quiz.R;
 
 public class SettingActivity extends AppCompatActivity {
 

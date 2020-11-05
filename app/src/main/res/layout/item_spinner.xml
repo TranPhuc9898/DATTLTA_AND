@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/txt_itemspinner"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_30sdp"
+    android:text="asd"
+    android:paddingHorizontal="@dimen/_10sdp"
+    android:textStyle="bold"
+    android:textSize="@dimen/_15sdp"
+    android:textColor="#000"
+    android:background="#fff"
+    android:gravity="center_vertical"
+    android:layout_gravity="center"
+    android:shadowRadius="1"/>

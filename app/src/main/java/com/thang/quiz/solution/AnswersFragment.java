@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.thang.quiz.R;
-import com.thang.quiz.SolutionActivity;
-import com.thang.quiz.question.Question;
+import com.thang.quiz.Activity.SolutionActivity;
+import com.thang.quiz.Item.Question;
 
 import java.util.ArrayList;
 

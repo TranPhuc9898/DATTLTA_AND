@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 
 import com.thang.quiz.R;
-import com.thang.quiz.SolutionActivity;
+import com.thang.quiz.Activity.SolutionActivity;
 
 public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
 

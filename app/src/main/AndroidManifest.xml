@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.thang.quiz">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,15 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".QuizActivity"
+        <activity android:name=".Activity.HighScoreActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".SolutionActivity"
+            android:name=".Activity.QuizActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.SolutionActivity"
             android:label="Solutions"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".Activity.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,12 +30,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingActivity"
+        <activity
+            android:name=".Activity.SettingActivity"
             android:label="Filter"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity"/>
+                android:value=".Activity.HomeActivity" />
         </activity>
     </application>
 

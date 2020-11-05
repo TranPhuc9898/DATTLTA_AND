@@ -1,4 +1,4 @@
-package com.thang.quiz;
+package com.thang.quiz.Activity;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.thang.quiz.R;
 import com.thang.quiz.solution.AnswerListAdapter;
 
 import java.util.ArrayList;

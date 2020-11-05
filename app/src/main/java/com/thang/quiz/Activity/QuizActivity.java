@@ -1,10 +1,13 @@
-package com.thang.quiz;
+package com.thang.quiz.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +20,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.thang.quiz.question.Question;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.thang.quiz.R;
+import com.thang.quiz.Item.Question;
 
 import java.util.ArrayList;
 
@@ -26,6 +32,9 @@ import butterknife.ButterKnife;
 
 
 public class QuizActivity extends AppCompatActivity {
+
+	FirebaseDatabase database;
+	DatabaseReference myRef;
 
 	Question qAndA = new Question();
 
@@ -259,6 +268,14 @@ public class QuizActivity extends AppCompatActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				submit(view);
+				database = FirebaseDatabase.getInstance();
+				myRef = database.getReference("highscore");
+				SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+					myRef.child(sharedPreferences.getString(getString(R.string.difficulty_key)," ")).child("catergaries:"+Integer.parseInt(sharedPreferences.getString(getString(R.string.category_key)," "))).
+							child(""+score+"_"+arrayListTime.stream().mapToInt(a->a).sum()).setValue("user123123");
+				}
+				Toast.makeText(QuizActivity.this, "123123", Toast.LENGTH_SHORT).show();
 			}
 		});
 		AlertDialog dialog = alertConfirm.create();

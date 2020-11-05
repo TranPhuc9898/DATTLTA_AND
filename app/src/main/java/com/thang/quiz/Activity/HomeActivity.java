@@ -1,4 +1,4 @@
-package com.thang.quiz;
+package com.thang.quiz.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,11 +13,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.thang.quiz.R;
 import com.thang.quiz.api.Api;
 import com.thang.quiz.api.ApiCount;
 import com.thang.quiz.api.QuizQuestion;
 import com.thang.quiz.api.Result;
-import com.thang.quiz.question.Question;
+import com.thang.quiz.Item.Question;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -33,6 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeActivity extends AppCompatActivity {
 	Button start;
 	Button filter;
+	Button highscore;
 	ProgressBar progressBar;
 	Question q;
 	String difficulty;
@@ -56,6 +58,9 @@ public class HomeActivity extends AppCompatActivity {
 					Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
+				}break;
+				case R.id.home_highscore:{
+					startActivity(new Intent(HomeActivity.this,HighScoreActivity.class));
 				}break;
 				default:{
 
@@ -81,9 +86,11 @@ public class HomeActivity extends AppCompatActivity {
 		setFilterDefaultValues();
 		start = findViewById(R.id.home_start);
 		filter = findViewById(R.id.home_filter);
+		highscore = findViewById(R.id.home_highscore);
 		progressBar = findViewById(R.id.progressBar2);
 		start.setOnClickListener(onClickListener);
 		filter.setOnClickListener(onClickListener);
+		highscore.setOnClickListener(onClickListener);
 
 		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		category = sharedPrefs.getString(

@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: com.jakewharton:butterknife-runtime:10.2.0@aar">
     <CLASSES>
-      <root url="jar://C:/SDK Android/caches/transforms-2/files-2.1/b4a10a0b6ecf6402b3ade2dad5275fba/jetified-butterknife-runtime-10.2.0/jars/classes.jar!/" />
       <root url="file://C:/SDK Android/caches/transforms-2/files-2.1/b4a10a0b6ecf6402b3ade2dad5275fba/jetified-butterknife-runtime-10.2.0/res" />
-      <root url="file://C:/SDK Android/caches/transforms-2/files-2.1/b4a10a0b6ecf6402b3ade2dad5275fba/jetified-butterknife-runtime-10.2.0/AndroidManifest.xml" />
+      <root url="file://C:/SDK Android/caches/transforms-2/files-2.1/02373f971b31a88bd84fab5801a713c9/jetified-butterknife-runtime-10.2.0/res" />
+      <root url="jar://C:/SDK Android/caches/transforms-2/files-2.1/02373f971b31a88bd84fab5801a713c9/jetified-butterknife-runtime-10.2.0/jars/classes.jar!/" />
+      <root url="file://C:/SDK Android/caches/transforms-2/files-2.1/02373f971b31a88bd84fab5801a713c9/jetified-butterknife-runtime-10.2.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://C:/SDK Android/caches/modules-2/files-2.1/com.jakewharton/butterknife-runtime/10.2.0/e60f0b06ff30552a476fcc61df52880fa902ee11/butterknife-runtime-10.2.0-javadoc.jar!/" />

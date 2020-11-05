@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.thang.quiz.R;
-import com.thang.quiz.SolutionActivity;
+import com.thang.quiz.Activity.SolutionActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

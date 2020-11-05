@@ -6,10 +6,34 @@
     android:background="@color/colorPrimaryDark"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".HomeActivity">
+    tools:context=".Activity.HomeActivity">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/edt_name"
+            android:background="#fff"
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_5sdp"
+            android:textSize="@dimen/_15sdp"
+            android:text="User123123"
+            android:gravity="center"
+            android:textColor="#000"/>
+        <Button
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_30dp"
+            android:text="change"
+            android:background="@android:color/white"/>
+    </LinearLayout>
 
     <ImageView
+        android:layout_marginTop="@dimen/_10sdp"
         android:id="@+id/imageView"
         android:layout_width="195dp"
         android:layout_height="229dp"
@@ -36,16 +60,35 @@
         android:textColor="@color/colorPrimaryDark"
         android:visibility="visible" />
 
-    <Button
-        android:id="@+id/home_filter"
-        android:layout_width="100dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center"
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:background="@drawable/roundable2"
-        android:text="@string/filter"
-        android:textColor="@color/colorPrimaryDark"
-        android:visibility="visible" />
+        android:orientation="horizontal"
+        android:gravity="center">
+        <Button
+            android:id="@+id/home_filter"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:background="@drawable/roundable2"
+            android:text="@string/filter"
+            android:textColor="@color/colorPrimaryDark"
+            android:visibility="visible" />
+        <TextView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="wrap_content"
+            />
+        <Button
+            android:id="@+id/home_highscore"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:background="@drawable/roundable2"
+            android:text="@string/highscore"
+            android:textColor="@color/colorPrimaryDark"
+            android:visibility="visible" />
+    </LinearLayout>
 
 
 </LinearLayout>

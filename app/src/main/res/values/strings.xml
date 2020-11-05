@@ -81,4 +81,5 @@
     <string name="category_key" translatable="false">category</string>
 
     <string name="filter">Filter</string>
+    <string name="highscore">Highscore</string>
 </resources>
