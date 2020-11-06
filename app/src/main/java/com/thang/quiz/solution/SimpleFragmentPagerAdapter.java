@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 
+import com.thang.quiz.Fragment.AnswersFragment;
+import com.thang.quiz.Fragment.QuestionsFragment;
 import com.thang.quiz.R;
 import com.thang.quiz.Activity.SolutionActivity;
 

@@ -1,6 +1,7 @@
 package com.thang.quiz.Activity;
 
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,6 +33,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class HighScoreActivity extends AppCompatActivity implements InterfaceAPI, View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -45,6 +46,9 @@ public class HighScoreActivity extends AppCompatActivity implements InterfaceAPI
     ArrayList<ItemHighScore> itemScoreArrayList;
     BaseAdapter adapterCategaries,adapterMode;
     AdatapterItemHighScore adatapterItemHighScore;
+    boolean check = false;
+    int categary = 0;
+    String mode = "Easy";
 
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -147,17 +151,6 @@ public class HighScoreActivity extends AppCompatActivity implements InterfaceAPI
         };
         sp_mode2.setAdapter(adapterMode);
         sp_mode2.setOnItemSelectedListener(this);
-
-        itemScoreArrayList = new ArrayList<>();
-        itemScoreArrayList.add(new ItemHighScore("abc","abc","abc"));
-        itemScoreArrayList.add(new ItemHighScore("abc","abc","abc"));
-        itemScoreArrayList.add(new ItemHighScore("abc","abc","abc"));
-        itemScoreArrayList.add(new ItemHighScore("abc","abc","abc"));
-        itemScoreArrayList.add(new ItemHighScore("abc","abc","abc"));
-
-        adatapterItemHighScore = new AdatapterItemHighScore(itemScoreArrayList);
-        listView.setAdapter(adatapterItemHighScore);
-
     }
 
     private void DataInstall() {
@@ -193,6 +186,7 @@ public class HighScoreActivity extends AppCompatActivity implements InterfaceAPI
                 }
             }
         });
+        SetDataListView(mode, categary);
     }
 
     @Override
@@ -210,11 +204,11 @@ public class HighScoreActivity extends AppCompatActivity implements InterfaceAPI
                 Log.d("123123",itemcategariesArrayList.toString());
             }
             catch (Exception ex) {
-                Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("123123",ex.toString());
             }
         }
         else {
-            Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
+            Log.d("123123",response.toString());
         }
     }
 
@@ -228,15 +222,21 @@ public class HighScoreActivity extends AppCompatActivity implements InterfaceAPI
         switch (adapterView.getId())
         {
             case R.id.spinner_mode1:{
-                Log.d("axzaxz",""+itemcategariesArrayList.get(i).id);
-                SetDataListView("",1);
+                if(check) {
+                    Log.d("axzaxz", "" + itemcategariesArrayList.get(i).id);
+                    categary = itemcategariesArrayList.get(i).id;
+                    SetDataListView(mode, categary);
+                }
 //                Toast.makeText(HighScoreActivity.this, categoriesArrayList.get(i), Toast.LENGTH_SHORT).show();
             }
             break;
-            case R.id.spinner_mode2:{
-                Log.d("axzaxz",modeList.get(i));
-                SetDataListView("",1);
+            case R.id.spinner_mode2: {
+                if (check) {
+                    Log.d("axzaxz", modeList.get(i));
+                    mode = modeList.get(i);
+                    SetDataListView(mode, categary);
 //                Toast.makeText(HighScoreActivity.this, modeList.get(i), Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }
@@ -248,16 +248,25 @@ public class HighScoreActivity extends AppCompatActivity implements InterfaceAPI
 
     public void SetDataListView(String mode,int categaries)
     {
-        itemScoreArrayList = new ArrayList<>();
+        check = true;
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReferenceFromUrl("https://quiz-e756f.firebaseio.com/highscore/easy/catergaries:0");
+        myRef = database.getReferenceFromUrl("https://quiz-e756f.firebaseio.com/highscore/"+mode.toLowerCase()+"/catergaries:"+categaries);
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Log.d("TAG", "Value is: " + dataSnapshot.getValue());
+                // whenever data at this location is updated
+//                Log.d("TAG", "Value is: " + dataSnapshot.getChildren());
+                itemScoreArrayList = new ArrayList<>();
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    itemScoreArrayList.add(new ItemHighScore(child.getValue().toString(),Integer.parseInt(child.getKey().split("_")[0]),Double.parseDouble(child.getKey().split("_")[1])));
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    itemScoreArrayList.sort(Comparator.comparing(ItemHighScore::getScore).reversed().thenComparing(ItemHighScore::getTime).thenComparing(ItemHighScore::getName));
+                }
+                adatapterItemHighScore = new AdatapterItemHighScore(itemScoreArrayList);
+                listView.setAdapter(adatapterItemHighScore);
             }
 
             @Override

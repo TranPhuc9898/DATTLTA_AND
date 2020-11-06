@@ -45,8 +45,8 @@ public class AdatapterItemHighScore extends BaseAdapter {
         viewHolder.txt_score = view.findViewById(R.id.txt_scoreHighScore);
         viewHolder.txt_time = view.findViewById(R.id.txt_timeHighScore);
 
-        viewHolder.txt_time.setText(getItem(i).time);
-        viewHolder.txt_score.setText(getItem(i).score);
+        viewHolder.txt_time.setText(""+getItem(i).time);
+        viewHolder.txt_score.setText(""+getItem(i).score);
         viewHolder.txt_name.setText(getItem(i).name);
 
         return view;

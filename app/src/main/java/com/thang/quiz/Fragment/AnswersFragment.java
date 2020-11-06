@@ -1,4 +1,4 @@
-package com.thang.quiz.solution;
+package com.thang.quiz.Fragment;
 
 
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.thang.quiz.R;
 import com.thang.quiz.Activity.SolutionActivity;
 import com.thang.quiz.Item.Question;
+import com.thang.quiz.solution.AnswerAdapter;
 
 import java.util.ArrayList;
 

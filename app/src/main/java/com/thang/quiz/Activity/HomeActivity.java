@@ -9,16 +9,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.thang.quiz.Fragment.EditNameUserFragment;
+import com.thang.quiz.Item.Question;
 import com.thang.quiz.R;
 import com.thang.quiz.api.Api;
 import com.thang.quiz.api.ApiCount;
 import com.thang.quiz.api.QuizQuestion;
 import com.thang.quiz.api.Result;
-import com.thang.quiz.Item.Question;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -35,6 +37,10 @@ public class HomeActivity extends AppCompatActivity {
 	Button start;
 	Button filter;
 	Button highscore;
+
+	TextView txt_edtName;
+	Button bt_changeName;
+
 	ProgressBar progressBar;
 	Question q;
 	String difficulty;
@@ -62,6 +68,10 @@ public class HomeActivity extends AppCompatActivity {
 				case R.id.home_highscore:{
 					startActivity(new Intent(HomeActivity.this,HighScoreActivity.class));
 				}break;
+				case R.id.bt_changename:{
+					EditNameUserFragment editNameUserFragment = new EditNameUserFragment();
+					editNameUserFragment.show(getSupportFragmentManager(),null);
+				}break;
 				default:{
 
 				}
@@ -88,9 +98,12 @@ public class HomeActivity extends AppCompatActivity {
 		filter = findViewById(R.id.home_filter);
 		highscore = findViewById(R.id.home_highscore);
 		progressBar = findViewById(R.id.progressBar2);
+		txt_edtName = findViewById(R.id.edt_name);
+		bt_changeName = findViewById(R.id.bt_changename);
 		start.setOnClickListener(onClickListener);
 		filter.setOnClickListener(onClickListener);
 		highscore.setOnClickListener(onClickListener);
+		bt_changeName.setOnClickListener(onClickListener);
 
 		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		category = sharedPrefs.getString(

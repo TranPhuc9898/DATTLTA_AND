@@ -27,7 +27,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
     private List<String> optC;
     private List<String> optD;
 
-    AnswerAdapter(ArrayList<Integer> answers, List<Integer> answer, List<String> optionsA, List<String> optionsB, List<String> optionsC, List<String> optionsD) {
+    public AnswerAdapter(ArrayList<Integer> answers, List<Integer> answer, List<String> optionsA, List<String> optionsB, List<String> optionsC, List<String> optionsD) {
         Answers = answers;
         Answer = answer;
         optA = optionsA;

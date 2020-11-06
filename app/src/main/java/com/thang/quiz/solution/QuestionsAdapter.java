@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.QuestionsViewHolder> {
     private List<String> Questions;
 
-    QuestionsAdapter(List<String> questions) {
+    public QuestionsAdapter(List<String> questions) {
         Questions = questions;
     }
 
