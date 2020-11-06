@@ -273,7 +273,7 @@ public class QuizActivity extends AppCompatActivity {
 				SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 					myRef.child(sharedPreferences.getString(getString(R.string.difficulty_key)," ")).child("catergaries:"+Integer.parseInt(sharedPreferences.getString(getString(R.string.category_key)," "))).
-							child(""+score+"_"+arrayListTime.stream().mapToInt(a->a).sum()).setValue("user123123");
+							child(""+score+"_"+arrayListTime.stream().mapToInt(a->a).sum()).setValue(HomeActivity.getStringName(getApplicationContext()));
 				}
 				Toast.makeText(QuizActivity.this, "123123", Toast.LENGTH_SHORT).show();
 			}

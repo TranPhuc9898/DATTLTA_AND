@@ -1,6 +1,7 @@
 package com.thang.quiz.Activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -38,13 +39,16 @@ public class HomeActivity extends AppCompatActivity {
 	Button filter;
 	Button highscore;
 
-	TextView txt_edtName;
+	public static TextView txt_edtName;
 	Button bt_changeName;
 
 	ProgressBar progressBar;
 	Question q;
 	String difficulty;
 	String category;
+
+	private static String name = "nameUSER";
+
 	View.OnClickListener onClickListener = new View.OnClickListener() {
 		@SuppressLint("NonConstantResourceId")
 		@Override
@@ -104,6 +108,8 @@ public class HomeActivity extends AppCompatActivity {
 		filter.setOnClickListener(onClickListener);
 		highscore.setOnClickListener(onClickListener);
 		bt_changeName.setOnClickListener(onClickListener);
+
+		txt_edtName.setText(getStringName(this));
 
 		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		category = sharedPrefs.getString(
@@ -348,5 +354,18 @@ public class HomeActivity extends AppCompatActivity {
 				}
 				break;
 		}
+	}
+
+	public static void putStringName(String nameUser,Context context) {
+		SharedPreferences app_prefs = context.getSharedPreferences("englishquiz",
+				Context.MODE_PRIVATE);
+		SharedPreferences.Editor edit = app_prefs.edit();
+		edit.putString(name, nameUser);
+		edit.commit();
+	}
+	public static String getStringName(Context context) {
+		SharedPreferences app_prefs = context.getSharedPreferences("englishquiz",
+				Context.MODE_PRIVATE);
+		return app_prefs.getString(name, "user123123");
 	}
 }
